@@ -1,0 +1,25 @@
+name,testament,chapter-count,verse-count,book-order
+Genesis (Bereshit),OT,50,1533,1
+Exodus (Shemot),OT,40,1213,2
+Leviticus (Vayikra),OT,27,859,3
+Numbers (Bamidbar),OT,36,1288,4
+Deuteronomy (Devarim),OT,34,959,5
+Joshua (Yehoshua),OT,24,658,6
+Judges (Shoftim),OT,21,618,7
+Samuel (1-2 Samuel),OT,55,1505,8
+Kings (1-2 Kings),OT,47,1535,9
+Isaiah (Yeshayahu),OT,66,1292,10
+Jeremiah (Yirmiyahu),OT,52,1364,11
+Ezekiel (Yechezkel),OT,48,1273,12
+The Twelve (Trei Asar),OT,67,1050,13
+Psalms (Tehillim),OT,150,2461,14
+Proverbs (Mishlei),OT,31,915,15
+Job (Iyov),OT,42,1070,16
+Song of Songs (Shir HaShirim),OT,8,117,17
+Ruth (Rut),OT,4,85,18
+Lamentations (Eikhah),OT,5,154,19
+Ecclesiastes (Qohelet),OT,12,222,20
+Esther (Esther),OT,10,167,21
+Daniel (Daniel),OT,12,357,22
+Ezra-Nehemiah,OT,23,686,23
+Chronicles (1-2 Chronicles),OT,65,1764,24

@@ -1,0 +1,74 @@
+name,testament,chapter_count,verse_count,book_order
+Genesis,OT,50,1533,1
+Exodus,OT,40,1213,2
+Leviticus,OT,27,859,3
+Numbers,OT,36,1288,4
+Deuteronomy,OT,34,959,5
+Joshua,OT,24,658,6
+Judges,OT,21,618,7
+Ruth,OT,4,85,8
+1 Samuel,OT,31,810,9
+2 Samuel,OT,24,695,10
+1 Kings,OT,22,816,11
+2 Kings,OT,25,719,12
+1 Chronicles,OT,29,942,13
+2 Chronicles,OT,36,822,14
+Ezra,OT,10,280,15
+Nehemiah,OT,13,406,16
+Tobit,AP,14,245,17
+Judith,AP,16,340,18
+Esther (with additions),OT,16,270,19
+1 Maccabees,AP,16,924,20
+2 Maccabees,AP,15,555,21
+Job,OT,42,1070,22
+Psalms,OT,150,2461,23
+Proverbs,OT,31,915,24
+Ecclesiastes,OT,12,222,25
+Song of Songs,OT,8,117,26
+Wisdom of Solomon,AP,19,436,27
+Sirach (Ecclesiasticus),AP,51,1375,28
+Isaiah,OT,66,1292,29
+Jeremiah,OT,52,1364,30
+Lamentations,OT,5,154,31
+Baruch (with Letter of Jeremiah),AP,6,213,32
+Ezekiel,OT,48,1273,33
+Daniel (with additions),OT,14,357,34
+Hosea,OT,14,197,35
+Joel,OT,3,73,36
+Amos,OT,9,146,37
+Obadiah,OT,1,21,38
+Jonah,OT,4,48,39
+Micah,OT,7,105,40
+Nahum,OT,3,47,41
+Habakkuk,OT,3,56,42
+Zephaniah,OT,3,53,43
+Haggai,OT,2,38,44
+Zechariah,OT,14,211,45
+Malachi,OT,4,55,46
+Matthew,NT,28,1071,47
+Mark,NT,16,678,48
+Luke,NT,24,1151,49
+John,NT,21,879,50
+Acts,NT,28,1007,51
+Romans,NT,16,433,52
+1 Corinthians,NT,16,437,53
+2 Corinthians,NT,13,257,54
+Galatians,NT,6,149,55
+Ephesians,NT,6,155,56
+Philippians,NT,4,104,57
+Colossians,NT,4,95,58
+1 Thessalonians,NT,5,89,59
+2 Thessalonians,NT,3,47,60
+1 Timothy,NT,6,113,61
+2 Timothy,NT,4,83,62
+Titus,NT,3,46,63
+Philemon,NT,1,25,64
+Hebrews,NT,13,303,65
+James,NT,5,108,66
+1 Peter,NT,5,105,67
+2 Peter,NT,3,61,68
+1 John,NT,5,105,69
+2 John,NT,1,13,70
+3 John,NT,1,14,71
+Jude,NT,1,25,72
+Revelation,NT,22,404,73

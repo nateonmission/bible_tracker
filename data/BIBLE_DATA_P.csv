@@ -1,0 +1,79 @@
+name,testament,chapter_count,verse_count,book_order
+Genesis,OT,50,1533,1
+Exodus,OT,40,1213,2
+Leviticus,OT,27,859,3
+Numbers,OT,36,1288,4
+Deuteronomy,OT,34,959,5
+Joshua,OT,24,658,6
+Judges,OT,21,618,7
+Ruth,OT,4,85,8
+1 Samuel,OT,31,810,9
+2 Samuel,OT,24,695,10
+1 Kings,OT,22,816,11
+2 Kings,OT,25,719,12
+1 Chronicles,OT,29,942,13
+2 Chronicles,OT,36,822,14
+Ezra,OT,10,280,15
+Nehemiah,OT,13,406,16
+Esther,OT,10,167,17
+Job,OT,42,1070,18
+Psalms,OT,150,2461,19
+Proverbs,OT,31,915,20
+Ecclesiastes,OT,12,222,21
+Song of Solomon,OT,8,117,22
+Isaiah,OT,66,1292,23
+Jeremiah,OT,52,1364,24
+Lamentations,OT,5,154,25
+Ezekiel,OT,48,1273,26
+Daniel,OT,12,357,27
+Hosea,OT,14,197,28
+Joel,OT,3,73,29
+Amos,OT,9,146,30
+Obadiah,OT,1,21,31
+Jonah,OT,4,48,32
+Micah,OT,7,105,33
+Nahum,OT,3,47,34
+Habakkuk,OT,3,56,35
+Zephaniah,OT,3,53,36
+Haggai,OT,2,38,37
+Zechariah,OT,14,211,38
+Malachi,OT,4,55,39
+Matthew,NT,28,1071,40
+Mark,NT,16,678,41
+Luke,NT,24,1151,42
+John,NT,21,879,43
+Acts,NT,28,1007,44
+Romans,NT,16,433,45
+1 Corinthians,NT,16,437,46
+2 Corinthians,NT,13,257,47
+Galatians,NT,6,149,48
+Ephesians,NT,6,155,49
+Philippians,NT,4,104,50
+Colossians,NT,4,95,51
+1 Thessalonians,NT,5,89,52
+2 Thessalonians,NT,3,47,53
+1 Timothy,NT,6,113,54
+2 Timothy,NT,4,83,55
+Titus,NT,3,46,56
+Philemon,NT,1,25,57
+Hebrews,NT,13,303,58
+James,NT,5,108,59
+1 Peter,NT,5,105,60
+2 Peter,NT,3,61,61
+1 John,NT,5,105,62
+2 John,NT,1,13,63
+3 John,NT,1,14,64
+Jude,NT,1,25,65
+Revelation,NT,22,404,66
+Tobit,AP,14,245,67
+Judith,AP,16,340,68
+Additions to Esther,AP,6,107,69
+Wisdom of Solomon,AP,19,436,70
+Sirach (Ecclesiasticus),AP,51,1375,71
+Baruch,AP,6,213,72
+Letter of Jeremiah,AP,1,73,73
+Prayer of Azariah,AP,1,68,74
+Susanna,AP,1,64,75
+Bel and the Dragon,AP,1,42,76
+1 Maccabees,AP,16,924,77
+2 Maccabees,AP,15,555,78
