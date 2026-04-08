@@ -14,3 +14,9 @@ class BookBase(BaseModel):
         if v not in {"OT", "NT", "AP"}:
             raise ValueError("testament must be OT, NT, or AP")
         return v
+    
+class BookRead(BookBase):
+    id: int
+
+    class Config:
+        from_attributes = True

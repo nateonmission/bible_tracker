@@ -1,6 +1,7 @@
 # schemas/reading.py
 
-from pydantic import BaseModel, field_validator
+
+from pydantic import BaseModel, field_validator, Field
 from datetime import date, datetime
 
 
@@ -41,6 +42,7 @@ class ReadingBase(BaseModel):
         return end_verse
     
 class ReadingCreate(ReadingBase):
+    date_read: date = Field(default_factory=date.today)
     pass
 
 
