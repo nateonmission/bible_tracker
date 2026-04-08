@@ -6,19 +6,11 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
-from database import SessionLocal
+from database import SessionLocal, get_db
 from models.book import Book
 from models.reading import Reading
 
 router = APIRouter(prefix="/api", tags=["progress"])
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 def get_chapters_read(db: Session, book_id: int) -> int:

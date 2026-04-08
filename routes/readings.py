@@ -6,20 +6,12 @@ from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
-from database import SessionLocal
+from database import SessionLocal, get_db
 from models.book import Book
 from models.reading import Reading
 from schemas.reading import ReadingCreate, ReadingRead
 
 router = APIRouter(prefix="/api/readings", tags=["readings"])
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @router.post("/", response_model=ReadingRead, status_code=201)
