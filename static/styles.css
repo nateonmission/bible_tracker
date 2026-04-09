@@ -205,11 +205,27 @@ td.heatmap[data-level="4"] { background-color: var(--hm-30plus);}
 }
 
 /* ─── Add Reading Form ─────────────────────────────────────── */
-#add-reading form {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+#add-reading {
+    margin-top: 2rem;
+}
+
+#add-reading h2 {
+    margin-bottom: 1rem;
+}
+
+#reading-form {
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
-    align-items: end;
+    align-items: flex-end;
+}
+
+.form-actions {
+    flex-basis: 100%;           /* force onto its own line */
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding-top: 0.25rem;
 }
 
 .form-group {
@@ -267,11 +283,88 @@ button[type="submit"]:hover,
     opacity: 0.85;
 }
 
+/* Clear / secondary button */
+button#clear-btn {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-family: 'Mulish', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.55rem 1.25rem;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+    white-space: nowrap;
+}
+
+button#clear-btn:hover {
+    border-color: var(--text-muted);
+    color: var(--text);
+}
+
+/* Confirmation message */
+.confirmation {
+    margin-top: 1rem;
+    padding: 0.65rem 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    background-color: var(--bg-raised);
+    border-left: 4px solid var(--highlight);
+    color: var(--highlight);
+}
+
+.confirmation.error {
+    border-left-color: #FF4444;
+    color: #FF4444;
+}
+
 /* ─── Reading History ──────────────────────────────────────── */
-#readings-list {
+.history-controls {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.history-controls button {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-family: 'Mulish', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.history-controls button:hover {
+    border-color: var(--highlight);
+    color: var(--highlight);
+}
+
+.empty-state {
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 1rem 0;
+}
+
+#readings-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+@media (max-width: 900px) {
+    #readings-list { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+    #readings-list { grid-template-columns: 1fr; }
 }
 
 .reading-entry {
@@ -312,6 +405,50 @@ button[type="submit"]:hover,
 .reading-entry .btn-delete:hover {
     border-color: #FF4444;
     color: #FF4444;
+}
+
+.entry-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+}
+
+.delete-confirm-label {
+    font-size: 0.78rem;
+    color: #FF4444;
+    white-space: nowrap;
+}
+
+.btn-confirm-delete,
+.btn-cancel-delete {
+    background: none;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+    white-space: nowrap;
+}
+
+.btn-confirm-delete {
+    border: 1px solid #FF4444;
+    color: #FF4444;
+}
+
+.btn-confirm-delete:hover {
+    background-color: #FF4444;
+    color: #fff;
+}
+
+.btn-cancel-delete {
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+
+.btn-cancel-delete:hover {
+    border-color: var(--text-muted);
+    color: var(--text);
 }
 
 /* ─── Progress Bars ────────────────────────────────────────── */
@@ -362,6 +499,50 @@ button[type="submit"]:hover,
     text-align: right;
     color: var(--text-muted);
     font-size: 0.78rem;
+}
+
+/* ─── Settings ─────────────────────────────────────────────── */
+.settings-group {
+    margin-bottom: 2rem;
+}
+
+.settings-group h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+}
+
+.settings-field {
+    max-width: 360px;
+    margin-bottom: 1rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text);
+    font-size: 0.95rem;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--highlight);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.setting-hint {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+    line-height: 1.4;
 }
 
 /* ─── Footer ───────────────────────────────────────────────── */

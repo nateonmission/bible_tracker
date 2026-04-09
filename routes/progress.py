@@ -2,6 +2,8 @@
 
 from datetime import date, timedelta
 
+from typing import Optional
+
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy import func
 from sqlalchemy.orm import Session
@@ -11,6 +13,27 @@ from models.book import Book
 from models.reading import Reading
 
 router = APIRouter(prefix="/api", tags=["progress"])
+
+
+@router.get("/books")
+def get_books(
+    canon: str = Query(default="P"),
+    testament: Optional[str] = Query(default=None),
+    db: Session = Depends(get_db),
+):
+    query = db.query(Book).filter(Book.canon == canon)
+    if testament:
+        query = query.filter(Book.testament == testament)
+    books = query.order_by(Book.book_order).all()
+    return [
+        {
+            "id": b.id,
+            "name": b.name,
+            "testament": b.testament,
+            "chapter_count": b.chapter_count,
+        }
+        for b in books
+    ]
 
 
 def get_chapters_read(db: Session, book_id: int) -> int:

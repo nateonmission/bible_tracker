@@ -4,6 +4,7 @@ import csv
 from pathlib import Path
 from database import engine, SessionLocal, Base
 from models.book import Book
+from models.reading import Reading  # noqa: F401 — ensures table is registered with Base
 
 CANON_FILES = {
     "P": "data/BIBLE_DATA_P.csv",

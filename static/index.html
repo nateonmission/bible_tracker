@@ -422,11 +422,47 @@
 
             <div id="add-reading">
                 <h2>Add Reading</h2>
+                <form id="reading-form">
+                    <div class="form-group">
+                        <label for="date-read">Date Read</label>
+                        <input type="date" id="date-read">
+                    </div>
+                    <div class="form-group">
+                        <label for="book-select">Book</label>
+                        <select id="book-select">
+                            <option value="">— select a book —</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="start-ch">Start Chapter</label>
+                        <select id="start-ch" disabled><option value="">—</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="start-vs">Start Verse</label>
+                        <select id="start-vs" disabled><option value="">—</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="end-ch">End Chapter</label>
+                        <select id="end-ch" disabled><option value="">—</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="end-vs">End Verse</label>
+                        <select id="end-vs" disabled><option value="">—</option></select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit">Save</button>
+                        <button type="button" id="clear-btn">Clear</button>
+                    </div>
+                </form>
+                <div id="reading-confirmation" hidden></div>
             </div>
         </section>
 
         <section id="reading-history" hidden>
             <h2>Reading History</h2>
+            <div class="history-controls">
+                <button type="button" id="sort-toggle">Sort by Book</button>
+            </div>
             <div id="readings-list"></div>
         </section>
 
@@ -436,6 +472,28 @@
 
         <section id="settings" hidden>
             <h2>Settings</h2>
+
+            <div class="settings-group">
+                <h3>Canon</h3>
+                <div class="form-group settings-field">
+                    <label for="canon-select">Default Canon</label>
+                    <select id="canon-select">
+                        <option value="P">Protestant (66 books)</option>
+                        <option value="C">Catholic (73 books)</option>
+                        <option value="J">Jewish / Tanakh (24 books)</option>
+                    </select>
+                </div>
+                <div class="form-group settings-field" id="apocrypha-row" hidden>
+                    <label class="checkbox-label" for="apocrypha-check">
+                        <input type="checkbox" id="apocrypha-check">
+                        Include Apocrypha
+                    </label>
+                    <p class="setting-hint">Adds the deuterocanonical books (Tobit, Judith, Sirach, 1–2 Maccabees, etc.)</p>
+                </div>
+            </div>
+
+            <button type="button" id="save-settings-btn" class="btn-primary">Save Settings</button>
+            <div id="settings-confirmation" hidden></div>
         </section>
 
     </div><!-- /.tab-content -->
