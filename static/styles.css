@@ -1,0 +1,556 @@
+@import url('https://fonts.googleapis.com/css2?family=Fontdiner+Swanky&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/* ─── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg:           #0D0015;
+    --bg-raised:    #1A0030;
+    --bg-card:      #220040;
+    --highlight:    #FFDA00;
+    --text:         #FFFFFF;
+    --text-muted:   #BBA8CC;
+    --border:       #3D1060;
+
+    --hm-empty:     #220040;
+    --hm-lt5:       #998E00;
+    --hm-lt15:      #CCC200;
+    --hm-lt30:      #FFDA00;
+    --hm-30plus:    #FFF800;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Mulish', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Fontdiner Swanky', cursive;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--highlight);
+}
+
+a {
+    color: var(--highlight);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ─── Header & Nav ─────────────────────────────────────────── */
+header {
+    background-color: var(--bg-raised);
+    padding: 1rem 2rem 0.75rem;
+}
+
+header h1 {
+    font-size: 2rem;
+}
+
+/* ─── Tab Nav ──────────────────────────────────────────────── */
+#main-nav {
+    background-color: var(--bg-raised);
+    padding: 0 2rem;
+}
+
+#main-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+}
+
+#main-nav ul li a {
+    display: block;
+    padding: 0.4rem 1.25rem;
+    margin-top: 6px;                        /* inactive tabs sit lower */
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    background-color: var(--bg);
+    color: var(--text-muted);
+    font-family: 'Mulish', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    text-decoration: none;
+    transition: color 0.15s, background-color 0.15s;
+    position: relative;
+}
+
+#main-nav ul li a:hover {
+    color: var(--text);
+    background-color: var(--bg-card);
+}
+
+#main-nav ul li a.active {
+    margin-top: 0;                          /* active tab sits flush at top */
+    padding-bottom: calc(0.4rem + 1px);     /* overlap the content border */
+    background-color: var(--bg-card);
+    border-color: var(--highlight);
+    color: var(--highlight);
+    z-index: 1;
+}
+
+/* ─── Tab Content ──────────────────────────────────────────── */
+.tab-content {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-top: 1px solid var(--highlight);
+    background-color: var(--bg-card);
+    margin: 0 2rem;
+    border-radius: 0 6px 6px 6px;
+    position: relative;
+    z-index: 0;
+}
+
+.tab-content > section {
+    padding: 2rem;
+    max-width: 1200px;
+}
+
+section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* ─── Cards ────────────────────────────────────────────────── */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+}
+
+/* ─── Heatmap ──────────────────────────────────────────────── */
+#heatmap {
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+table.heatmap {
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+table.heatmap td {
+    width: 14px;
+    height: 14px;
+    padding: 0;
+}
+
+td.day-label {
+    width: 28px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-align: right;
+    padding-right: 4px;
+    white-space: nowrap;
+}
+
+td.heatmap {
+    background-color: var(--hm-empty);
+    border-radius: 2px;
+    cursor: default;
+}
+
+td.heatmap:not(:last-child) {
+    margin-right: 2px;
+}
+
+/* Verse-count levels — applied by JS */
+td.heatmap[data-level="0"] { background-color: var(--hm-empty); }
+td.heatmap[data-level="1"] { background-color: var(--hm-lt5);   }
+td.heatmap[data-level="2"] { background-color: var(--hm-lt15);  }
+td.heatmap[data-level="3"] { background-color: var(--hm-lt30);  }
+td.heatmap[data-level="4"] { background-color: var(--hm-30plus);}
+
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.heatmap-legend span.swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+/* ─── Add Reading Form ─────────────────────────────────────── */
+#add-reading {
+    margin-top: 2rem;
+}
+
+#add-reading h2 {
+    margin-bottom: 1rem;
+}
+
+#reading-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.form-actions {
+    flex-basis: 100%;           /* force onto its own line */
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding-top: 0.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.form-group input,
+.form-group select {
+    background-color: var(--bg-raised);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    font-family: 'Mulish', sans-serif;
+    font-size: 0.95rem;
+    width: 100%;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--highlight);
+}
+
+.form-group select option {
+    background-color: var(--bg-raised);
+}
+
+button[type="submit"],
+.btn-primary {
+    background-color: var(--highlight);
+    color: var(--bg);
+    border: none;
+    border-radius: 4px;
+    padding: 0.55rem 1.5rem;
+    font-family: 'Fontdiner Swanky', cursive;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+}
+
+button[type="submit"]:hover,
+.btn-primary:hover {
+    opacity: 0.85;
+}
+
+/* Clear / secondary button */
+button#clear-btn {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-family: 'Mulish', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.55rem 1.25rem;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+    white-space: nowrap;
+}
+
+button#clear-btn:hover {
+    border-color: var(--text-muted);
+    color: var(--text);
+}
+
+/* Confirmation message */
+.confirmation {
+    margin-top: 1rem;
+    padding: 0.65rem 1rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    background-color: var(--bg-raised);
+    border-left: 4px solid var(--highlight);
+    color: var(--highlight);
+}
+
+.confirmation.error {
+    border-left-color: #FF4444;
+    color: #FF4444;
+}
+
+/* ─── Reading History ──────────────────────────────────────── */
+.history-controls {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.history-controls button {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-family: 'Mulish', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.history-controls button:hover {
+    border-color: var(--highlight);
+    color: var(--highlight);
+}
+
+.empty-state {
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 1rem 0;
+}
+
+#readings-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+@media (max-width: 900px) {
+    #readings-list { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+    #readings-list { grid-template-columns: 1fr; }
+}
+
+.reading-entry {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.reading-entry .ref {
+    font-family: 'Mulish', sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.reading-entry .date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.reading-entry .btn-delete {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    padding: 0.25rem 0.6rem;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.reading-entry .btn-delete:hover {
+    border-color: #FF4444;
+    color: #FF4444;
+}
+
+.entry-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+}
+
+.delete-confirm-label {
+    font-size: 0.78rem;
+    color: #FF4444;
+    white-space: nowrap;
+}
+
+.btn-confirm-delete,
+.btn-cancel-delete {
+    background: none;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+    white-space: nowrap;
+}
+
+.btn-confirm-delete {
+    border: 1px solid #FF4444;
+    color: #FF4444;
+}
+
+.btn-confirm-delete:hover {
+    background-color: #FF4444;
+    color: #fff;
+}
+
+.btn-cancel-delete {
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+
+.btn-cancel-delete:hover {
+    border-color: var(--text-muted);
+    color: var(--text);
+}
+
+/* ─── Progress Bars ────────────────────────────────────────── */
+.progress-section {
+    margin-bottom: 2rem;
+}
+
+.progress-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-muted);
+}
+
+.progress-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.85rem;
+}
+
+.progress-bar-row .book-name {
+    width: 130px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-muted);
+}
+
+.progress-bar-track {
+    flex: 1;
+    height: 8px;
+    background-color: var(--hm-empty);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--highlight);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progress-bar-row .pct {
+    width: 40px;
+    text-align: right;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+/* ─── Settings ─────────────────────────────────────────────── */
+.settings-group {
+    margin-bottom: 2rem;
+}
+
+.settings-group h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+}
+
+.settings-field {
+    max-width: 360px;
+    margin-bottom: 1rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text);
+    font-size: 0.95rem;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--highlight);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.setting-hint {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+    line-height: 1.4;
+}
+
+/* ─── Footer ───────────────────────────────────────────────── */
+footer {
+    background-color: var(--bg-raised);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}

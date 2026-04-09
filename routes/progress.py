@@ -2,6 +2,8 @@
 
 from datetime import date, timedelta
 
+from typing import Optional
+
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy import func
 from sqlalchemy.orm import Session
@@ -11,6 +13,27 @@ from models.book import Book
 from models.reading import Reading
 
 router = APIRouter(prefix="/api", tags=["progress"])
+
+
+@router.get("/books")
+def get_books(
+    canon: str = Query(default="P"),
+    testament: Optional[str] = Query(default=None),
+    db: Session = Depends(get_db),
+):
+    query = db.query(Book).filter(Book.canon == canon)
+    if testament:
+        query = query.filter(Book.testament == testament)
+    books = query.order_by(Book.book_order).all()
+    return [
+        {
+            "id": b.id,
+            "name": b.name,
+            "testament": b.testament,
+            "chapter_count": b.chapter_count,
+        }
+        for b in books
+    ]
 
 
 def get_chapters_read(db: Session, book_id: int) -> int:
@@ -103,21 +126,28 @@ def get_heatmap(db: Session = Depends(get_db)):
     today = date.today()
     start = today - timedelta(days=364)
 
-    daily_counts = (
-        db.query(Reading.date_read, func.count(Reading.id))
+    readings = (
+        db.query(Reading, Book)
+        .join(Book, Reading.book_id == Book.id)
         .filter(Reading.date_read >= start, Reading.date_read <= today)
-        .group_by(Reading.date_read)
         .all()
     )
 
-    counts_map = {row[0]: row[1] for row in daily_counts}
+    verse_map: dict[date, int] = {}
+    for reading, book in readings:
+        if reading.start_chapter == reading.end_chapter:
+            verses = reading.end_verse - reading.start_verse + 1
+        else:
+            avg = book.verse_count / book.chapter_count if book.chapter_count else 0
+            verses = round(avg * (reading.end_chapter - reading.start_chapter + 1))
+        verse_map[reading.date_read] = verse_map.get(reading.date_read, 0) + verses
 
     heatmap = []
     for i in range(365):
         d = start + timedelta(days=i)
         heatmap.append({
             "date": d.isoformat(),
-            "count": counts_map.get(d, 0),
+            "count": verse_map.get(d, 0),
         })
 
     return heatmap

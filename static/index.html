@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Bible Tracker</title>
+</head>
+<body>
+
+    <header>
+        <h1>Bible Tracker</h1>
+    </header>
+
+    <nav id="main-nav">
+        <ul>
+            <li><a href="#dashboard"       class="tab-link active">Dashboard</a></li>
+            <li><a href="#reading-history" class="tab-link">Reading History</a></li>
+            <li><a href="#reading-plans"   class="tab-link">Reading Plans</a></li>
+            <li><a href="#settings"        class="tab-link">Settings</a></li>
+        </ul>
+    </nav>
+
+    <div class="tab-content">
+
+        <section id="dashboard">
+            <h2>Dashboard</h2>
+
+            <div id="heatmap">
+                <table class="heatmap">
+                    <thead class="heatmap"></thead>
+                    <tr class="heatmap"><td class="day-label">Sun</td>
+                        <td class="heatmap" id="hm1"></td>
+                        <td class="heatmap" id="hm8"></td>
+                        <td class="heatmap" id="hm15"></td>
+                        <td class="heatmap" id="hm22"></td>
+                        <td class="heatmap" id="hm29"></td>
+                        <td class="heatmap" id="hm36"></td>
+                        <td class="heatmap" id="hm43"></td>
+                        <td class="heatmap" id="hm50"></td>
+                        <td class="heatmap" id="hm57"></td>
+                        <td class="heatmap" id="hm64"></td>
+                        <td class="heatmap" id="hm71"></td>
+                        <td class="heatmap" id="hm78"></td>
+                        <td class="heatmap" id="hm85"></td>
+                        <td class="heatmap" id="hm92"></td>
+                        <td class="heatmap" id="hm99"></td>
+                        <td class="heatmap" id="hm106"></td>
+                        <td class="heatmap" id="hm113"></td>
+                        <td class="heatmap" id="hm120"></td>
+                        <td class="heatmap" id="hm127"></td>
+                        <td class="heatmap" id="hm134"></td>
+                        <td class="heatmap" id="hm141"></td>
+                        <td class="heatmap" id="hm148"></td>
+                        <td class="heatmap" id="hm155"></td>
+                        <td class="heatmap" id="hm162"></td>
+                        <td class="heatmap" id="hm169"></td>
+                        <td class="heatmap" id="hm176"></td>
+                        <td class="heatmap" id="hm183"></td>
+                        <td class="heatmap" id="hm190"></td>
+                        <td class="heatmap" id="hm197"></td>
+                        <td class="heatmap" id="hm204"></td>
+                        <td class="heatmap" id="hm211"></td>
+                        <td class="heatmap" id="hm218"></td>
+                        <td class="heatmap" id="hm225"></td>
+                        <td class="heatmap" id="hm232"></td>
+                        <td class="heatmap" id="hm239"></td>
+                        <td class="heatmap" id="hm246"></td>
+                        <td class="heatmap" id="hm253"></td>
+                        <td class="heatmap" id="hm260"></td>
+                        <td class="heatmap" id="hm267"></td>
+                        <td class="heatmap" id="hm274"></td>
+                        <td class="heatmap" id="hm281"></td>
+                        <td class="heatmap" id="hm288"></td>
+                        <td class="heatmap" id="hm295"></td>
+                        <td class="heatmap" id="hm302"></td>
+                        <td class="heatmap" id="hm309"></td>
+                        <td class="heatmap" id="hm316"></td>
+                        <td class="heatmap" id="hm323"></td>
+                        <td class="heatmap" id="hm330"></td>
+                        <td class="heatmap" id="hm337"></td>
+                        <td class="heatmap" id="hm344"></td>
+                        <td class="heatmap" id="hm351"></td>
+                        <td class="heatmap" id="hm358"></td>
+                    </tr>
+                    <tr class="heatmap"><td class="day-label">Mon</td>
+                        <td class="heatmap" id="hm2"></td>
+                        <td class="heatmap" id="hm9"></td>
+                        <td class="heatmap" id="hm16"></td>
+                        <td class="heatmap" id="hm23"></td>
+                        <td class="heatmap" id="hm30"></td>
+                        <td class="heatmap" id="hm37"></td>
+                        <td class="heatmap" id="hm44"></td>
+                        <td class="heatmap" id="hm51"></td>
+                        <td class="heatmap" id="hm58"></td>
+                        <td class="heatmap" id="hm65"></td>
+                        <td class="heatmap" id="hm72"></td>
+                        <td class="heatmap" id="hm79"></td>
+                        <td class="heatmap" id="hm86"></td>
+                        <td class="heatmap" id="hm93"></td>
+                        <td class="heatmap" id="hm100"></td>
+                        <td class="heatmap" id="hm107"></td>
+                        <td class="heatmap" id="hm114"></td>
+                        <td class="heatmap" id="hm121"></td>
+                        <td class="heatmap" id="hm128"></td>
+                        <td class="heatmap" id="hm135"></td>
+                        <td class="heatmap" id="hm142"></td>
+                        <td class="heatmap" id="hm149"></td>
+                        <td class="heatmap" id="hm156"></td>
+                        <td class="heatmap" id="hm163"></td>
+                        <td class="heatmap" id="hm170"></td>
+                        <td class="heatmap" id="hm177"></td>
+                        <td class="heatmap" id="hm184"></td>
+                        <td class="heatmap" id="hm191"></td>
+                        <td class="heatmap" id="hm198"></td>
+                        <td class="heatmap" id="hm205"></td>
+                        <td class="heatmap" id="hm212"></td>
+                        <td class="heatmap" id="hm219"></td>
+                        <td class="heatmap" id="hm226"></td>
+                        <td class="heatmap" id="hm233"></td>
+                        <td class="heatmap" id="hm240"></td>
+                        <td class="heatmap" id="hm247"></td>
+                        <td class="heatmap" id="hm254"></td>
+                        <td class="heatmap" id="hm261"></td>
+                        <td class="heatmap" id="hm268"></td>
+                        <td class="heatmap" id="hm275"></td>
+                        <td class="heatmap" id="hm282"></td>
+                        <td class="heatmap" id="hm289"></td>
+                        <td class="heatmap" id="hm296"></td>
+                        <td class="heatmap" id="hm303"></td>
+                        <td class="heatmap" id="hm310"></td>
+                        <td class="heatmap" id="hm317"></td>
+                        <td class="heatmap" id="hm324"></td>
+                        <td class="heatmap" id="hm331"></td>
+                        <td class="heatmap" id="hm338"></td>
+                        <td class="heatmap" id="hm345"></td>
+                        <td class="heatmap" id="hm352"></td>
+                        <td class="heatmap" id="hm359"></td>
+                    </tr>
+                    <tr class="heatmap"><td class="day-label">Tue</td>
+                        <td class="heatmap" id="hm3"></td>
+                        <td class="heatmap" id="hm10"></td>
+                        <td class="heatmap" id="hm17"></td>
+                        <td class="heatmap" id="hm24"></td>
+                        <td class="heatmap" id="hm31"></td>
+                        <td class="heatmap" id="hm38"></td>
+                        <td class="heatmap" id="hm45"></td>
+                        <td class="heatmap" id="hm52"></td>
+                        <td class="heatmap" id="hm59"></td>
+                        <td class="heatmap" id="hm66"></td>
+                        <td class="heatmap" id="hm73"></td>
+                        <td class="heatmap" id="hm80"></td>
+                        <td class="heatmap" id="hm87"></td>
+                        <td class="heatmap" id="hm94"></td>
+                        <td class="heatmap" id="hm101"></td>
+                        <td class="heatmap" id="hm108"></td>
+                        <td class="heatmap" id="hm115"></td>
+                        <td class="heatmap" id="hm122"></td>
+                        <td class="heatmap" id="hm129"></td>
+                        <td class="heatmap" id="hm136"></td>
+                        <td class="heatmap" id="hm143"></td>
+                        <td class="heatmap" id="hm150"></td>
+                        <td class="heatmap" id="hm157"></td>
+                        <td class="heatmap" id="hm164"></td>
+                        <td class="heatmap" id="hm171"></td>
+                        <td class="heatmap" id="hm178"></td>
+                        <td class="heatmap" id="hm185"></td>
+                        <td class="heatmap" id="hm192"></td>
+                        <td class="heatmap" id="hm199"></td>
+                        <td class="heatmap" id="hm206"></td>
+                        <td class="heatmap" id="hm213"></td>
+                        <td class="heatmap" id="hm220"></td>
+                        <td class="heatmap" id="hm227"></td>
+                        <td class="heatmap" id="hm234"></td>
+                        <td class="heatmap" id="hm241"></td>
+                        <td class="heatmap" id="hm248"></td>
+                        <td class="heatmap" id="hm255"></td>
+                        <td class="heatmap" id="hm262"></td>
+                        <td class="heatmap" id="hm269"></td>
+                        <td class="heatmap" id="hm276"></td>
+                        <td class="heatmap" id="hm283"></td>
+                        <td class="heatmap" id="hm290"></td>
+                        <td class="heatmap" id="hm297"></td>
+                        <td class="heatmap" id="hm304"></td>
+                        <td class="heatmap" id="hm311"></td>
+                        <td class="heatmap" id="hm318"></td>
+                        <td class="heatmap" id="hm325"></td>
+                        <td class="heatmap" id="hm332"></td>
+                        <td class="heatmap" id="hm339"></td>
+                        <td class="heatmap" id="hm346"></td>
+                        <td class="heatmap" id="hm353"></td>
+                        <td class="heatmap" id="hm360"></td>
+                    </tr>
+                    <tr class="heatmap"><td class="day-label">Wed</td>
+                        <td class="heatmap" id="hm4"></td>
+                        <td class="heatmap" id="hm11"></td>
+                        <td class="heatmap" id="hm18"></td>
+                        <td class="heatmap" id="hm25"></td>
+                        <td class="heatmap" id="hm32"></td>
+                        <td class="heatmap" id="hm39"></td>
+                        <td class="heatmap" id="hm46"></td>
+                        <td class="heatmap" id="hm53"></td>
+                        <td class="heatmap" id="hm60"></td>
+                        <td class="heatmap" id="hm67"></td>
+                        <td class="heatmap" id="hm74"></td>
+                        <td class="heatmap" id="hm81"></td>
+                        <td class="heatmap" id="hm88"></td>
+                        <td class="heatmap" id="hm95"></td>
+                        <td class="heatmap" id="hm102"></td>
+                        <td class="heatmap" id="hm109"></td>
+                        <td class="heatmap" id="hm116"></td>
+                        <td class="heatmap" id="hm123"></td>
+                        <td class="heatmap" id="hm130"></td>
+                        <td class="heatmap" id="hm137"></td>
+                        <td class="heatmap" id="hm144"></td>
+                        <td class="heatmap" id="hm151"></td>
+                        <td class="heatmap" id="hm158"></td>
+                        <td class="heatmap" id="hm165"></td>
+                        <td class="heatmap" id="hm172"></td>
+                        <td class="heatmap" id="hm179"></td>
+                        <td class="heatmap" id="hm186"></td>
+                        <td class="heatmap" id="hm193"></td>
+                        <td class="heatmap" id="hm200"></td>
+                        <td class="heatmap" id="hm207"></td>
+                        <td class="heatmap" id="hm214"></td>
+                        <td class="heatmap" id="hm221"></td>
+                        <td class="heatmap" id="hm228"></td>
+                        <td class="heatmap" id="hm235"></td>
+                        <td class="heatmap" id="hm242"></td>
+                        <td class="heatmap" id="hm249"></td>
+                        <td class="heatmap" id="hm256"></td>
+                        <td class="heatmap" id="hm263"></td>
+                        <td class="heatmap" id="hm270"></td>
+                        <td class="heatmap" id="hm277"></td>
+                        <td class="heatmap" id="hm284"></td>
+                        <td class="heatmap" id="hm291"></td>
+                        <td class="heatmap" id="hm298"></td>
+                        <td class="heatmap" id="hm305"></td>
+                        <td class="heatmap" id="hm312"></td>
+                        <td class="heatmap" id="hm319"></td>
+                        <td class="heatmap" id="hm326"></td>
+                        <td class="heatmap" id="hm333"></td>
+                        <td class="heatmap" id="hm340"></td>
+                        <td class="heatmap" id="hm347"></td>
+                        <td class="heatmap" id="hm354"></td>
+                        <td class="heatmap" id="hm361"></td>
+                    </tr>
+                    <tr class="heatmap"><td class="day-label">Thu</td>
+                        <td class="heatmap" id="hm5"></td>
+                        <td class="heatmap" id="hm12"></td>
+                        <td class="heatmap" id="hm19"></td>
+                        <td class="heatmap" id="hm26"></td>
+                        <td class="heatmap" id="hm33"></td>
+                        <td class="heatmap" id="hm40"></td>
+                        <td class="heatmap" id="hm47"></td>
+                        <td class="heatmap" id="hm54"></td>
+                        <td class="heatmap" id="hm61"></td>
+                        <td class="heatmap" id="hm68"></td>
+                        <td class="heatmap" id="hm75"></td>
+                        <td class="heatmap" id="hm82"></td>
+                        <td class="heatmap" id="hm89"></td>
+                        <td class="heatmap" id="hm96"></td>
+                        <td class="heatmap" id="hm103"></td>
+                        <td class="heatmap" id="hm110"></td>
+                        <td class="heatmap" id="hm117"></td>
+                        <td class="heatmap" id="hm124"></td>
+                        <td class="heatmap" id="hm131"></td>
+                        <td class="heatmap" id="hm138"></td>
+                        <td class="heatmap" id="hm145"></td>
+                        <td class="heatmap" id="hm152"></td>
+                        <td class="heatmap" id="hm159"></td>
+                        <td class="heatmap" id="hm166"></td>
+                        <td class="heatmap" id="hm173"></td>
+                        <td class="heatmap" id="hm180"></td>
+                        <td class="heatmap" id="hm187"></td>
+                        <td class="heatmap" id="hm194"></td>
+                        <td class="heatmap" id="hm201"></td>
+                        <td class="heatmap" id="hm208"></td>
+                        <td class="heatmap" id="hm215"></td>
+                        <td class="heatmap" id="hm222"></td>
+                        <td class="heatmap" id="hm229"></td>
+                        <td class="heatmap" id="hm236"></td>
+                        <td class="heatmap" id="hm243"></td>
+                        <td class="heatmap" id="hm250"></td>
+                        <td class="heatmap" id="hm257"></td>
+                        <td class="heatmap" id="hm264"></td>
+                        <td class="heatmap" id="hm271"></td>
+                        <td class="heatmap" id="hm278"></td>
+                        <td class="heatmap" id="hm285"></td>
+                        <td class="heatmap" id="hm292"></td>
+                        <td class="heatmap" id="hm299"></td>
+                        <td class="heatmap" id="hm306"></td>
+                        <td class="heatmap" id="hm313"></td>
+                        <td class="heatmap" id="hm320"></td>
+                        <td class="heatmap" id="hm327"></td>
+                        <td class="heatmap" id="hm334"></td>
+                        <td class="heatmap" id="hm341"></td>
+                        <td class="heatmap" id="hm348"></td>
+                        <td class="heatmap" id="hm355"></td>
+                        <td class="heatmap" id="hm362"></td>
+                    </tr>
+                    <tr class="heatmap"><td class="day-label">Fri</td>
+                        <td class="heatmap" id="hm6"></td>
+                        <td class="heatmap" id="hm13"></td>
+                        <td class="heatmap" id="hm20"></td>
+                        <td class="heatmap" id="hm27"></td>
+                        <td class="heatmap" id="hm34"></td>
+                        <td class="heatmap" id="hm41"></td>
+                        <td class="heatmap" id="hm48"></td>
+                        <td class="heatmap" id="hm55"></td>
+                        <td class="heatmap" id="hm62"></td>
+                        <td class="heatmap" id="hm69"></td>
+                        <td class="heatmap" id="hm76"></td>
+                        <td class="heatmap" id="hm83"></td>
+                        <td class="heatmap" id="hm90"></td>
+                        <td class="heatmap" id="hm97"></td>
+                        <td class="heatmap" id="hm104"></td>
+                        <td class="heatmap" id="hm111"></td>
+                        <td class="heatmap" id="hm118"></td>
+                        <td class="heatmap" id="hm125"></td>
+                        <td class="heatmap" id="hm132"></td>
+                        <td class="heatmap" id="hm139"></td>
+                        <td class="heatmap" id="hm146"></td>
+                        <td class="heatmap" id="hm153"></td>
+                        <td class="heatmap" id="hm160"></td>
+                        <td class="heatmap" id="hm167"></td>
+                        <td class="heatmap" id="hm174"></td>
+                        <td class="heatmap" id="hm181"></td>
+                        <td class="heatmap" id="hm188"></td>
+                        <td class="heatmap" id="hm195"></td>
+                        <td class="heatmap" id="hm202"></td>
+                        <td class="heatmap" id="hm209"></td>
+                        <td class="heatmap" id="hm216"></td>
+                        <td class="heatmap" id="hm223"></td>
+                        <td class="heatmap" id="hm230"></td>
+                        <td class="heatmap" id="hm237"></td>
+                        <td class="heatmap" id="hm244"></td>
+                        <td class="heatmap" id="hm251"></td>
+                        <td class="heatmap" id="hm258"></td>
+                        <td class="heatmap" id="hm265"></td>
+                        <td class="heatmap" id="hm272"></td>
+                        <td class="heatmap" id="hm279"></td>
+                        <td class="heatmap" id="hm286"></td>
+                        <td class="heatmap" id="hm293"></td>
+                        <td class="heatmap" id="hm300"></td>
+                        <td class="heatmap" id="hm307"></td>
+                        <td class="heatmap" id="hm314"></td>
+                        <td class="heatmap" id="hm321"></td>
+                        <td class="heatmap" id="hm328"></td>
+                        <td class="heatmap" id="hm335"></td>
+                        <td class="heatmap" id="hm342"></td>
+                        <td class="heatmap" id="hm349"></td>
+                        <td class="heatmap" id="hm356"></td>
+                        <td class="heatmap" id="hm363"></td>
+                    </tr>
+                    <tr class="heatmap"><td class="day-label">Sat</td>
+                        <td class="heatmap" id="hm7"></td>
+                        <td class="heatmap" id="hm14"></td>
+                        <td class="heatmap" id="hm21"></td>
+                        <td class="heatmap" id="hm28"></td>
+                        <td class="heatmap" id="hm35"></td>
+                        <td class="heatmap" id="hm42"></td>
+                        <td class="heatmap" id="hm49"></td>
+                        <td class="heatmap" id="hm56"></td>
+                        <td class="heatmap" id="hm63"></td>
+                        <td class="heatmap" id="hm70"></td>
+                        <td class="heatmap" id="hm77"></td>
+                        <td class="heatmap" id="hm84"></td>
+                        <td class="heatmap" id="hm91"></td>
+                        <td class="heatmap" id="hm98"></td>
+                        <td class="heatmap" id="hm105"></td>
+                        <td class="heatmap" id="hm112"></td>
+                        <td class="heatmap" id="hm119"></td>
+                        <td class="heatmap" id="hm126"></td>
+                        <td class="heatmap" id="hm133"></td>
+                        <td class="heatmap" id="hm140"></td>
+                        <td class="heatmap" id="hm147"></td>
+                        <td class="heatmap" id="hm154"></td>
+                        <td class="heatmap" id="hm161"></td>
+                        <td class="heatmap" id="hm168"></td>
+                        <td class="heatmap" id="hm175"></td>
+                        <td class="heatmap" id="hm182"></td>
+                        <td class="heatmap" id="hm189"></td>
+                        <td class="heatmap" id="hm196"></td>
+                        <td class="heatmap" id="hm203"></td>
+                        <td class="heatmap" id="hm210"></td>
+                        <td class="heatmap" id="hm217"></td>
+                        <td class="heatmap" id="hm224"></td>
+                        <td class="heatmap" id="hm231"></td>
+                        <td class="heatmap" id="hm238"></td>
+                        <td class="heatmap" id="hm245"></td>
+                        <td class="heatmap" id="hm252"></td>
+                        <td class="heatmap" id="hm259"></td>
+                        <td class="heatmap" id="hm266"></td>
+                        <td class="heatmap" id="hm273"></td>
+                        <td class="heatmap" id="hm280"></td>
+                        <td class="heatmap" id="hm287"></td>
+                        <td class="heatmap" id="hm294"></td>
+                        <td class="heatmap" id="hm301"></td>
+                        <td class="heatmap" id="hm308"></td>
+                        <td class="heatmap" id="hm315"></td>
+                        <td class="heatmap" id="hm322"></td>
+                        <td class="heatmap" id="hm329"></td>
+                        <td class="heatmap" id="hm336"></td>
+                        <td class="heatmap" id="hm343"></td>
+                        <td class="heatmap" id="hm350"></td>
+                        <td class="heatmap" id="hm357"></td>
+                        <td class="heatmap" id="hm364"></td>
+                    </tr>
+                </table>
+
+                <div class="heatmap-legend">
+                    <span>Less</span>
+                    <span class="swatch" style="background:var(--hm-empty)"></span>
+                    <span class="swatch" style="background:var(--hm-lt5)"></span>
+                    <span class="swatch" style="background:var(--hm-lt15)"></span>
+                    <span class="swatch" style="background:var(--hm-lt30)"></span>
+                    <span class="swatch" style="background:var(--hm-30plus)"></span>
+                    <span>More</span>
+                </div>
+            </div>
+
+            <div id="add-reading">
+                <h2>Add Reading</h2>
+                <form id="reading-form">
+                    <div class="form-group">
+                        <label for="date-read">Date Read</label>
+                        <input type="date" id="date-read">
+                    </div>
+                    <div class="form-group">
+                        <label for="book-select">Book</label>
+                        <select id="book-select">
+                            <option value="">— select a book —</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="start-ch">Start Chapter</label>
+                        <select id="start-ch" disabled><option value="">—</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="start-vs">Start Verse</label>
+                        <select id="start-vs" disabled><option value="">—</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="end-ch">End Chapter</label>
+                        <select id="end-ch" disabled><option value="">—</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="end-vs">End Verse</label>
+                        <select id="end-vs" disabled><option value="">—</option></select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit">Save</button>
+                        <button type="button" id="clear-btn">Clear</button>
+                    </div>
+                </form>
+                <div id="reading-confirmation" hidden></div>
+            </div>
+        </section>
+
+        <section id="reading-history" hidden>
+            <h2>Reading History</h2>
+            <div class="history-controls">
+                <button type="button" id="sort-toggle">Sort by Book</button>
+            </div>
+            <div id="readings-list"></div>
+        </section>
+
+        <section id="reading-plans" hidden>
+            <h2>Reading Plans</h2>
+        </section>
+
+        <section id="settings" hidden>
+            <h2>Settings</h2>
+
+            <div class="settings-group">
+                <h3>Canon</h3>
+                <div class="form-group settings-field">
+                    <label for="canon-select">Default Canon</label>
+                    <select id="canon-select">
+                        <option value="P">Protestant (66 books)</option>
+                        <option value="C">Catholic (73 books)</option>
+                        <option value="J">Jewish / Tanakh (24 books)</option>
+                    </select>
+                </div>
+                <div class="form-group settings-field" id="apocrypha-row" hidden>
+                    <label class="checkbox-label" for="apocrypha-check">
+                        <input type="checkbox" id="apocrypha-check">
+                        Include Apocrypha
+                    </label>
+                    <p class="setting-hint">Adds the deuterocanonical books (Tobit, Judith, Sirach, 1–2 Maccabees, etc.)</p>
+                </div>
+            </div>
+
+            <button type="button" id="save-settings-btn" class="btn-primary">Save Settings</button>
+            <div id="settings-confirmation" hidden></div>
+        </section>
+
+    </div><!-- /.tab-content -->
+
+    <footer>
+        <p>&copy; 2026 Nate Allen. All rights reserved.</p>
+    </footer>
+
+    <script src="/static/js.js"></script>
+</body>
+</html>
