@@ -334,6 +334,7 @@ document.getElementById('reading-form').addEventListener('submit', async functio
 
         // Refresh cached readings so history is up to date
         fetchReadings();
+        loadProgressOverview();
 
     } catch (err) {
         showConfirmation('Error saving reading. Please try again.', true);
@@ -499,6 +500,7 @@ function initSettings() {
         };
         localStorage.setItem('bibleTrackerSettings', JSON.stringify(updated));
         await refreshBooks();
+        loadProgressOverview();
     }
 
     // Canon dropdown — show/hide Apocrypha row and apply immediately
@@ -520,6 +522,113 @@ function initSettings() {
         el.hidden      = false;
         setTimeout(() => { el.hidden = true; }, 4000);
     });
+}
+
+
+// ─── Progress Overview ────────────────────────────────────────
+const TESTAMENT_LABELS = { OT: 'Old Testament', NT: 'New Testament', AP: 'Apocrypha' };
+
+function gaugeHTML(pct, size, label) {
+    const cx   = size / 2;
+    const cy   = size / 2;
+    const r    = Math.round(size * 0.37);
+    const sw   = Math.round(size * 0.09);
+    const circ = +(2 * Math.PI * r).toFixed(2);
+    const arc  = +(circ * 0.75).toFixed(2);   // 270° sweep
+    const fill = +(arc * Math.min(Math.max(pct, 0), 1)).toFixed(2);
+    const fs   = Math.round(size * 0.17);
+
+    return `<div class="gauge-wrap">
+      <svg viewBox="0 0 ${size} ${size}" class="gauge-svg">
+        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none"
+          stroke="var(--border)" stroke-width="${sw}"
+          stroke-dasharray="${arc} ${circ}"
+          transform="rotate(225 ${cx} ${cy})"/>
+        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none"
+          stroke="var(--highlight)" stroke-width="${sw}" stroke-linecap="round"
+          stroke-dasharray="${fill} ${circ}"
+          transform="rotate(225 ${cx} ${cy})"/>
+        <text x="${cx}" y="${cy + Math.round(fs * 0.4)}"
+          text-anchor="middle" fill="var(--text)"
+          font-size="${fs}" font-weight="700" font-family="inherit">${Math.round(pct * 100)}%</text>
+      </svg>
+      <p class="gauge-label">${label}</p>
+    </div>`;
+}
+
+function bookBarHTML(book) {
+    const pct = Math.min(book.percentage, 100);
+    return `<div class="book-bar">
+      <span class="book-bar-name">${book.name}</span>
+      <span class="book-bar-pct">${pct > 0 ? Math.round(pct) + '%' : ''}</span>
+      <div class="book-bar-track"><div class="book-bar-fill" style="width:${pct}%"></div></div>
+    </div>`;
+}
+
+function renderProgressOverview(summary, progress, canon, includeApocrypha) {
+    const container = document.getElementById('progress-overview');
+    if (!container) return;
+
+    const showAP = includeApocrypha;
+
+    // Active testament keys (have books, respect AP filter)
+    const testamentKeys = Object.keys(summary)
+        .filter(k => k !== 'total' && summary[k].chapter_count > 0 && (showAP || k !== 'AP'));
+
+    // Overall totals recalculated from the visible testaments
+    const totalChapters = testamentKeys.reduce((s, k) => s + summary[k].chapter_count, 0);
+    const totalRead     = testamentKeys.reduce((s, k) => s + summary[k].chapters_read, 0);
+    const overallPct    = totalChapters > 0 ? totalRead / totalChapters : 0;
+
+    let html = `<div class="gauge-row gauge-row-main">${gaugeHTML(overallPct, 200, 'Bible Read')}</div>`;
+
+    // Testament gauges — skip for Jewish canon or when only one testament exists
+    if (canon !== 'J' && testamentKeys.length > 1) {
+        html += `<div class="gauge-row gauge-row-testaments">`;
+        for (const key of testamentKeys) {
+            const pct = (summary[key].chapter_percentage || 0) / 100;
+            html += gaugeHTML(pct, 140, TESTAMENT_LABELS[key] || key);
+        }
+        html += `</div>`;
+    }
+
+    // Per-book bars grouped by testament
+    const showHeaders = canon !== 'J' && testamentKeys.length > 1;
+    for (const key of ['OT', 'NT', 'AP']) {
+        if (!showAP && key === 'AP') continue;
+        const books = progress[key];
+        if (!books || books.length === 0) continue;
+
+        if (showHeaders) {
+            html += `<h3 class="book-group-label">${TESTAMENT_LABELS[key] || key}</h3>`;
+        }
+        html += `<div class="book-progress-grid">`;
+        books.forEach(book => { html += bookBarHTML(book); });
+        html += `</div>`;
+    }
+
+    container.innerHTML = html;
+}
+
+async function loadProgressOverview() {
+    const settings         = getSettings();
+    const canon            = settings.canon           || 'P';
+    const includeApocrypha = settings.includeApocrypha || false;
+
+    try {
+        const [summaryRes, progressRes] = await Promise.all([
+            fetch(`/api/progress/summary?canon=${canon}`),
+            fetch(`/api/progress?canon=${canon}`),
+        ]);
+        renderProgressOverview(
+            await summaryRes.json(),
+            await progressRes.json(),
+            canon,
+            includeApocrypha,
+        );
+    } catch (err) {
+        console.error('Failed to load progress:', err);
+    }
 }
 
 
@@ -614,4 +723,5 @@ function buildHeatmapMonthLabels(today) {
 // ─── Init ─────────────────────────────────────────────────────
 initForm();
 initSettings();
+loadProgressOverview();
 loadHeatmap();
