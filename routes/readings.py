@@ -1,12 +1,10 @@
-# routes/readings.py
-
-from datetime import date, datetime
+from datetime import date
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
-from database import SessionLocal, get_db
+from database import get_db
 from models.book import Book
 from models.reading import Reading
 from schemas.reading import ReadingCreate, ReadingRead
@@ -24,7 +22,6 @@ def create_reading(
     if not book:
         raise HTTPException(status_code=404, detail="Book not found in this canon")
 
-    # Validate chapters are within range
     if reading.start_chapter > book.chapter_count:
         raise HTTPException(
             status_code=422,
@@ -45,7 +42,6 @@ def create_reading(
         end_chapter=reading.end_chapter,
         end_verse=reading.end_verse,
         date_read=reading.date_read,
-        created_at=datetime.now(),
     )
     db.add(db_reading)
     db.commit()

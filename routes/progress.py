@@ -1,11 +1,8 @@
-# routes/progress.py
-
 from datetime import date, timedelta
 
 from typing import Optional
 
 from fastapi import APIRouter, Depends, Query
-from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from database import SessionLocal, get_db

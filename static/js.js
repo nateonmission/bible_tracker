@@ -122,18 +122,16 @@ const booksById = {};
 let   booksFetched = false;
 
 async function fetchBooksForCurrentSettings() {
-    const settings          = getSettings();
-    const canon             = settings.canon          || 'P';
-    const includeApocrypha  = settings.includeApocrypha || false;
+    const settings         = getSettings();
+    const canon            = settings.canon           || 'P';
+    const includeApocrypha = settings.includeApocrypha || false;
 
     const res   = await fetch(`/api/books?canon=${canon}`);
-    const books = await res.json();
+    let   books = await res.json();
 
-    // Protestant + Apocrypha: append deuterocanonical books from the Catholic dataset
-    if (canon === 'P' && includeApocrypha) {
-        const apRes   = await fetch('/api/books?canon=C&testament=AP');
-        const apBooks = await apRes.json();
-        return [...books, ...apBooks];
+    // Strip AP-testament books unless the user has opted in
+    if (!includeApocrypha) {
+        books = books.filter(b => b.testament !== 'AP');
     }
 
     return books;
@@ -525,6 +523,95 @@ function initSettings() {
 }
 
 
+// ─── Heatmap ──────────────────────────────────────────────────
+const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+async function loadHeatmap() {
+    try {
+        const res  = await fetch('/api/heatmap');
+        const data = await res.json();
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Today sits in the last column (col 51); its row = day-of-week (0=Sun)
+        const todayCell = 51 * 7 + today.getDay() + 1;  // 1-based cell index
+
+        data.forEach(({ date, count }) => {
+            const d       = new Date(date + 'T00:00:00');
+            const daysAgo = Math.round((today - d) / 86400000);
+            const cellIdx = todayCell - daysAgo;
+            if (cellIdx < 1 || cellIdx > 364) return;
+
+            const cell = document.getElementById('hm' + cellIdx);
+            if (!cell) return;
+
+            cell.dataset.level = count === 0 ? 0
+                               : count <  5  ? 1
+                               : count < 15  ? 2
+                               : count < 30  ? 3
+                               :               4;
+
+            const label = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            cell.title  = count > 0 ? `${label}: ${count} verses` : label;
+        });
+
+        buildHeatmapMonthLabels(today);
+
+    } catch (err) {
+        console.error('Failed to load heatmap:', err);
+    }
+}
+
+function buildHeatmapMonthLabels(today) {
+    const thead = document.querySelector('thead.heatmap');
+    if (!thead) return;
+
+    // Sunday of the current week
+    const weekStart = new Date(today);
+    weekStart.setDate(today.getDate() - today.getDay());
+
+    // Determine which month each of the 52 columns belongs to (by its Sunday)
+    const colMonths = [];
+    for (let col = 0; col < 52; col++) {
+        const sunday = new Date(weekStart);
+        sunday.setDate(weekStart.getDate() - (51 - col) * 7);
+        colMonths.push(sunday.getMonth());
+    }
+
+    // Collapse consecutive same-month columns into spans
+    const spans = [];
+    let run = 1;
+    for (let col = 1; col < 52; col++) {
+        if (colMonths[col] === colMonths[col - 1]) {
+            run++;
+        } else {
+            spans.push({ month: colMonths[col - 1], span: run });
+            run = 1;
+        }
+    }
+    spans.push({ month: colMonths[51], span: run });
+
+    // Build the header row
+    const row = document.createElement('tr');
+    const spacer = document.createElement('td');   // aligns with the day-label column
+    spacer.className = 'day-label';
+    row.appendChild(spacer);
+
+    spans.forEach(({ month, span }) => {
+        const th = document.createElement('th');
+        th.colSpan   = span;
+        th.className = 'heatmap-month';
+        th.textContent = span >= 3 ? MONTH_NAMES[month] : '';
+        row.appendChild(th);
+    });
+
+    thead.innerHTML = '';
+    thead.appendChild(row);
+}
+
+
 // ─── Init ─────────────────────────────────────────────────────
 initForm();
 initSettings();
+loadHeatmap();

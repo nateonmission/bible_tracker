@@ -1,5 +1,3 @@
-# schemas/book.py
-
 from pydantic import BaseModel, field_validator
 
 class BookBase(BaseModel):
@@ -17,6 +15,4 @@ class BookBase(BaseModel):
     
 class BookRead(BookBase):
     id: int
-
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
