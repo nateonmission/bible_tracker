@@ -1,8 +1,6 @@
-# models/reading.py
-
 from sqlalchemy import Column, Integer, Date, DateTime, ForeignKey, Index
 from sqlalchemy.orm import relationship
-from datetime import datetime
+from datetime import datetime, timezone
 
 from database import Base
 
@@ -25,8 +23,7 @@ class Reading(Base):
     end_verse = Column(Integer, nullable=False)
 
     date_read = Column(Date, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)
 
-    # Relationship (optional but recommended)
     book = relationship("Book", backref="readings")
     

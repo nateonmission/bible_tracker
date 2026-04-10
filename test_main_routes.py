@@ -1,5 +1,3 @@
-# test_main_routes.py
-
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -33,16 +31,9 @@ def override_get_db():
         db.close()
 
 
-# Override get_db in both route modules
 from routes.readings import get_db as _r_get_db
 from routes.progress import get_db as _p_get_db
-from routes import readings as readings_module
-from routes import progress as progress_module
 
-readings_module.get_db = override_get_db
-progress_module.get_db = override_get_db
-
-# Also override via FastAPI dependency_overrides
 app.dependency_overrides[_r_get_db] = override_get_db
 app.dependency_overrides[_p_get_db] = override_get_db
 
@@ -461,7 +452,8 @@ class TestHeatmap:
         response = client.get("/api/heatmap")
         data = response.json()
         today_entry = next(d for d in data if d["date"] == today)
-        assert today_entry["count"] == 2
+        # Genesis 1:1-31 = 31 verses, Genesis 2:1-25 = 25 verses
+        assert today_entry["count"] == 56
 
     def test_heatmap_consecutive_dates(self):
         """Verify no gaps in date sequence."""

@@ -1,5 +1,3 @@
-# test_db.py
-
 from database import engine, SessionLocal
 from models.book import Book
 from sqlalchemy import inspect

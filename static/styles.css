@@ -151,7 +151,10 @@ section h2 {
 }
 
 table.heatmap {
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 2px;
+    background-color: var(--border);
+    border-radius: 3px;
     table-layout: fixed;
 }
 
@@ -177,9 +180,6 @@ td.heatmap {
     cursor: default;
 }
 
-td.heatmap:not(:last-child) {
-    margin-right: 2px;
-}
 
 /* Verse-count levels — applied by JS */
 td.heatmap[data-level="0"] { background-color: var(--hm-empty); }
@@ -187,6 +187,15 @@ td.heatmap[data-level="1"] { background-color: var(--hm-lt5);   }
 td.heatmap[data-level="2"] { background-color: var(--hm-lt15);  }
 td.heatmap[data-level="3"] { background-color: var(--hm-lt30);  }
 td.heatmap[data-level="4"] { background-color: var(--hm-30plus);}
+
+th.heatmap-month {
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-align: left;
+    padding-bottom: 4px;
+    white-space: nowrap;
+}
 
 .heatmap-legend {
     display: flex;
