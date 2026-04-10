@@ -51,13 +51,12 @@ def create_reading(
 
 @router.get("/", response_model=list[ReadingRead])
 def list_readings(
-    canon: str = Query(default="P"),
     book_id: Optional[int] = Query(None),
     start_date: Optional[date] = Query(None),
     end_date: Optional[date] = Query(None),
     db: Session = Depends(get_db),
 ):
-    query = db.query(Reading).join(Book).filter(Book.canon == canon)
+    query = db.query(Reading)
 
     if book_id is not None:
         query = query.filter(Reading.book_id == book_id)

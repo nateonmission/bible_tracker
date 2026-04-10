@@ -117,8 +117,11 @@ function getMaxVerse(bookName, chapter) {
 
 
 // ─── Shared Book Data ─────────────────────────────────────────
-// Keyed by book id: { id, name, testament, chapter_count, order }
-const booksById = {};
+// booksById   — filtered to current canon/apocrypha, used for the form dropdown
+// allBooksById — every book from every canon, used for history display lookups;
+//                populated once on init and never cleared (readings may reference any canon)
+const booksById    = {};
+const allBooksById = {};
 let   booksFetched = false;
 
 async function fetchBooksForCurrentSettings() {
@@ -135,6 +138,25 @@ async function fetchBooksForCurrentSettings() {
     }
 
     return books;
+}
+
+let allBooksPopulated = false;
+
+async function populateAllBooks() {
+    if (allBooksPopulated) return;
+    try {
+        const results = await Promise.all([
+            fetch('/api/books?canon=P').then(r => r.json()),
+            fetch('/api/books?canon=C').then(r => r.json()),
+            fetch('/api/books?canon=J').then(r => r.json()),
+        ]);
+        results.flat().forEach(book => {
+            allBooksById[book.id] = book;
+        });
+        allBooksPopulated = true;
+    } catch (err) {
+        console.error('Failed to populate all books:', err);
+    }
 }
 
 async function ensureBooks() {
@@ -371,7 +393,7 @@ let sortMode    = 'chrono'; // 'chrono' | 'book'
 
 async function fetchReadings() {
     try {
-        const res = await fetch('/api/readings/?canon=P');
+        const res = await fetch('/api/readings/');
         allReadings = await res.json();
     } catch (err) {
         console.error('Failed to fetch readings:', err);
@@ -379,7 +401,7 @@ async function fetchReadings() {
 }
 
 async function loadReadings() {
-    await ensureBooks();
+    await Promise.all([ensureBooks(), populateAllBooks()]);
     await fetchReadings();
     renderReadings();
 }
@@ -396,8 +418,8 @@ function renderReadings() {
     } else {
         // Biblical order → chapter → verse
         sorted.sort((a, b) => {
-            const orderA = booksById[a.book_id]?.order ?? 999;
-            const orderB = booksById[b.book_id]?.order ?? 999;
+            const orderA = (allBooksById[a.book_id] ?? booksById[a.book_id])?.order ?? 999;
+            const orderB = (allBooksById[b.book_id] ?? booksById[b.book_id])?.order ?? 999;
             return orderA - orderB
                 || a.start_chapter - b.start_chapter
                 || a.start_verse   - b.start_verse;
@@ -411,7 +433,7 @@ function renderReadings() {
 
     list.innerHTML = '';
     sorted.forEach(reading => {
-        const book    = booksById[reading.book_id];
+        const book    = allBooksById[reading.book_id] ?? booksById[reading.book_id];
         const name    = book?.name ?? `Book #${reading.book_id}`;
         const ref     = `${name} ${reading.start_chapter}:${reading.start_verse}–${reading.end_chapter}:${reading.end_verse}`;
         const dateFmt = new Date(reading.date_read + 'T00:00:00').toLocaleDateString('en-US', {
@@ -721,6 +743,7 @@ function buildHeatmapMonthLabels(today) {
 
 
 // ─── Init ─────────────────────────────────────────────────────
+populateAllBooks();
 initForm();
 initSettings();
 loadProgressOverview();
